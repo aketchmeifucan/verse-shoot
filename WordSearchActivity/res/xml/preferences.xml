@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<CheckBoxPreference
+		android:key="error_beep_pref"
+		android:title="@string/pref_error_beep_title"
+		android:summary="@string/pref_error_beep_summary"
+		android:defaultValue="true" />
+		
+
+	<CheckBoxPreference
+		android:key="use_nack_beep"
+		android:title="@string/pref_nack_beep_title"
+		android:summary="@string/pref_nack_beep_summary"
+		android:defaultValue="true" />
+		 -->
+</PreferenceScreen>

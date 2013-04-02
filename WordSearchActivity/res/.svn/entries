@@ -1,0 +1,70 @@
+10
+
+dir
+26
+https://svn.cse.taylor.edu/svn/BibleMemorizer/trunk/app/res
+https://svn.cse.taylor.edu/svn/BibleMemorizer
+
+
+
+2013-03-12T18:51:48.862331Z
+25
+erodrigu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+563f53e6-013c-4eaa-a957-f062ad2ec159
+
+values
+dir
+
+xml
+dir
+
+drawable
+dir
+
+drawable-hdpi
+dir
+
+menu
+dir
+
+values-v11
+dir
+
+layout-large
+dir
+
+drawable-ldpi
+dir
+
+values-v14
+dir
+
+drawable-mdpi
+dir
+
+layout-land
+dir
+
+drawable-xhdpi
+dir
+
+layout
+dir
+
+layout-xlarge
+dir
+
