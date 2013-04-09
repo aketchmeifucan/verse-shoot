@@ -4,5 +4,7 @@
     <string name="app_name">Verse-shoot</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="left">&lt; &lt;</string>
+    <string name="right">&gt; &gt;</string>
 
 </resources>
