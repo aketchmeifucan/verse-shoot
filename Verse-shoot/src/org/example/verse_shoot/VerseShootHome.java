@@ -16,7 +16,7 @@ import android.view.View.OnClickListener;
 public class VerseShootHome extends Activity implements OnClickListener {
 
 	//Button leftButton, rightButton, beamL, beamR;
-	ImageView leftButton, rightButton;
+	ImageView leftButton, rightButton,lightBeam;
 	Button beamL, beamR;
 	TextView lt, mt, rt,la,ra;
 	
@@ -29,8 +29,11 @@ public class VerseShootHome extends Activity implements OnClickListener {
         leftButton.setOnClickListener(this);
         rightButton = (ImageView) findViewById(R.id.rightButton);
         rightButton.setOnClickListener(this);
+        lightBeam = (ImageView) findViewById(R.id.lightBeam);
         beamL = (Button) findViewById(R.id.beamButtonl);
+        beamL.setOnClickListener(this);
         beamR = (Button) findViewById(R.id.beamButtonr);
+        beamR.setOnClickListener(this);
         lt = (TextView) findViewById(R.id.w1);
         mt = (TextView) findViewById(R.id.w2);
         rt = (TextView) findViewById(R.id.w3);
@@ -60,23 +63,23 @@ public class VerseShootHome extends Activity implements OnClickListener {
 //        		msg.show();
 //        	}
 //        });
-        beamL.setOnClickListener(new OnClickListener ()
-        {
-        	public void onClick(View v)
-        	{
-        		
-        		Toast msg = Toast.makeText(getBaseContext(), "BEAM!!", Toast.LENGTH_SHORT);
-        		msg.show();
-        	}
-        });
-        beamR.setOnClickListener(new OnClickListener ()
-        {
-        	public void onClick(View v)
-        	{
-        		Toast msg = Toast.makeText(getBaseContext(), "BEAM!!", Toast.LENGTH_SHORT);
-        		msg.show();
-        	}
-        });
+//        beamL.setOnClickListener(new OnClickListener ()
+//        {
+//        	public void onClick(View v)
+//        	{
+//        		
+//        		Toast msg = Toast.makeText(getBaseContext(), "BEAM!!", Toast.LENGTH_SHORT);
+//        		msg.show();
+//        	}
+//        });
+//        beamR.setOnClickListener(new OnClickListener ()
+//        {
+//        	public void onClick(View v)
+//        	{
+//        		Toast msg = Toast.makeText(getBaseContext(), "BEAM!!", Toast.LENGTH_SHORT);
+//        		msg.show();
+//        	}
+//        });
     }
 
  /*   private void addListenerOnButton() {
@@ -163,7 +166,25 @@ public class VerseShootHome extends Activity implements OnClickListener {
                 }
             }, 250);
     		break;
-		}	
+        case R.id.beamButtonl:
+        		lightBeam.setVisibility(0);
+        		lightBeam.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                 		lightBeam.setVisibility(4);
+                    }
+                }, 250);
+        		break;
+        case R.id.beamButtonr:
+    		lightBeam.setVisibility(0);
+    		lightBeam.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+             		lightBeam.setVisibility(4);
+                }
+            }, 250);
+    		break;
+    	}
     }
 
 	@Override

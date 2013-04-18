@@ -53,7 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/beamButtonl"
         android:layout_alignLeft="@+id/rightButton"
-        android:text="Beam!" />
+        android:text="Beam!"
+        android:clickable = "true" />
 
     <Button
         android:id="@+id/beamButtonl"
@@ -61,14 +62,17 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/leftButton"
         android:layout_alignLeft="@+id/leftButton"
-        android:text="Beam!" />
+        android:text="Beam!"
+        android:clickable = "true" />
 
     <ImageView
         android:id="@+id/beam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/rightButton"
-        android:layout_centerHorizontal="true"
+        android:layout_above = "@+id/beamButtonl"
+        android:layout_toLeftOf="@+id/rightButton"
+        android:layout_toRightOf="@+id/leftButton"
+        android:gravity="center_horizontal"
         android:src="@android:drawable/ic_menu_upload_you_tube" />
     
 <!--     <HorizontalScrollView -->
@@ -173,15 +177,16 @@
 <!--     android:layout_marginLeft="23dp" -->
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/lightBeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		android:adjustViewBounds="true"
-		android:scaleType="fitCenter"
+		android:scaleType="centerInside"
         android:layout_above="@+id/beam"
         android:layout_toRightOf="@+id/leftButton"
         android:layout_toLeftOf="@+id/rightButton"
         android:gravity="center_horizontal"
-        android:src="@drawable/beam" />
-
+        android:src="@drawable/beam"
+        android:visibility="invisible" />
+    
 </RelativeLayout>
