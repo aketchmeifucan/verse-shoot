@@ -14,7 +14,6 @@ public interface Constants extends BaseColumns {
    public static final String TABLE_NAME = "testverses";
 
    // Columns in the Events database
-   public static final String ID = "id";
    public static final String VERSE = "verse";
    public static final String VERSE_TEXT = "verse_text";
 }
