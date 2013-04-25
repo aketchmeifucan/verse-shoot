@@ -11,6 +11,7 @@ public class answerText {
 	public int[] filledStrings; // Ordered list. Index of filled string. Draw should use to determine what strings answered/filled in.
 	
 	
+	
 	public answerText(String ref,String verse ){	// Constructor
 		populateTextObj(ref,verse);
 		randomizeBlanks();
@@ -60,4 +61,38 @@ public class answerText {
 				Arrays.asList(filledStrings).add(x);
 		}
 	}
+	
+	//Function to return the current word
+	public String currentWord(){
+		return textStrings[iterator].get();
+	}
+	
+	// Tells if we are done with this verse ( be sure to check if last word is not blank)
+	public boolean isComplete(){
+		if((iterator+1) == textStrings.length){
+			return true;
+		}
+		return false;
+	}
+	
+	// Generate the return string with "_" for blanks and filled words filled in.
+	private String genString(){
+		String ansVerse = "";
+		for(int i = 0; i <textStrings.length; i++){
+			if(Arrays.asList(filledStrings).contains(i)){	// Filled in word
+				ansVerse = ansVerse + textStrings[i].get();
+			} else{
+				if(i == iterator){	// Highlighted Blank
+					ansVerse = ansVerse + " << _ >> ";
+				} else {			// Regular Blank
+					ansVerse = ansVerse + "_";
+				}				
+			}
+			
+		}
+		
+		return ansVerse;
+	}
+	
+	
 }
