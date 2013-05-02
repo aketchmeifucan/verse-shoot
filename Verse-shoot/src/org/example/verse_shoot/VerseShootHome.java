@@ -28,6 +28,11 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	Intent intent = getIntent();
+    	String VERSE = intent.getStringExtra("VERSE");
+    	String VERSE_TEXT = intent.getStringExtra("VERSE_TEXT");
+    	System.out.println(VERSE);
+    	System.out.println(VERSE_TEXT);
     	String[] wordList = {"John","Mary","Jesus","God","Lord",
     			"Christ","Matthew","Judas","Peter","Paul"};
     	randWords = new ArrayList<String>(Arrays.asList(wordList));
