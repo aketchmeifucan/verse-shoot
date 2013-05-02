@@ -1,6 +1,7 @@
 package org.example.verse_shoot;
 
 import java.lang.reflect.Array;
+
 import static java.util.Arrays.asList;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import org.example.verse_shoot.answerText;
 
 public class VerseShootHome extends Activity implements OnClickListener {
 	
@@ -36,6 +38,9 @@ public class VerseShootHome extends Activity implements OnClickListener {
     	String[] wordList = {"John","Mary","Jesus","God","Lord",
     			"Christ","Matthew","Judas","Peter","Paul"};
     	randWords = new ArrayList<String>(Arrays.asList(wordList));
+    	//answerText verseText = new answerText("John 3:16","For God so loved the world, that " +
+    	//		"he gave his only Son, that whoever believes in him should not perish but have " +
+    		//	"eternal life.");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verse_shoot_home);
         //leftButton = (Button) findViewById(R.id.leftButton);
@@ -109,11 +114,11 @@ public class VerseShootHome extends Activity implements OnClickListener {
                              		la.setVisibility(4);
                              		ra.setVisibility(4);
                                 }
-                            }, 250);
+                            }, 100);
                         }
-                    }, 250);
+                    }, 100);
                 }
-            }, 250);
+            }, 100);
     		break;
         case R.id.rightButton:
         	la.setText("--        ");  
@@ -142,11 +147,11 @@ public class VerseShootHome extends Activity implements OnClickListener {
                              		la.setVisibility(4);
                              		ra.setVisibility(4);
                                 }
-                            }, 250);
+                            }, 100);
                         }
-                    }, 250);
+                    }, 100);
                 }
-            }, 250);
+            }, 100);
     		break;
         case R.id.beamButtonl:
         		lightBeam.setVisibility(0);
