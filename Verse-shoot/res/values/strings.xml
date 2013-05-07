@@ -6,5 +6,6 @@
     <string name="menu_settings">Settings</string>
     <string name="left">&lt; &lt;</string>
     <string name="right">&gt; &gt;</string>
+    <string name="empty">No data!</string>
 
 </resources>

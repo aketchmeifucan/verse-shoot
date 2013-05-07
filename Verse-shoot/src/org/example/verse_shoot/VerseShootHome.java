@@ -36,14 +36,21 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verse_shoot_home);
+    	Intent intent = getIntent();
+    	String VERSE = intent.getStringExtra("VERSE");
+    	String VERSE_TEXT = intent.getStringExtra("VERSE_TEXT");
+    	System.out.println(VERSE);
+    	System.out.println(VERSE_TEXT);
     	String[] wordList = {"John","Mary","Jesus","God","Lord",
     			"Christ","Matthew","Judas","Peter","Paul"};
     	randWords = new ArrayList<String>(Arrays.asList(wordList));
-    	String verseString = "John 3:16" + "For God so loved the world, that " +
-    	    			"he gave his only Son, that whoever believes in him should not perish but have " +
-    	    			"eternal life.";
+//    	String verseString = "John 3:16" + "For God so loved the world, that " +
+//    	    			"he gave his only Son, that whoever believes in him should not perish but have " +
+//    	    			"eternal life.";
+    	String verseString = VERSE + VERSE_TEXT;
     	String[] verseArray = verseString.split("\\s+");
     	
     	Log.d(tag,"HELLO");
