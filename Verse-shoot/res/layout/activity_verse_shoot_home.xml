@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_verse_shoot_home"
     android:layout_width="match_parent"
-    android:layout_height = "wrap_content"
+    android:layout_height = "fill_parent"
     android:background="@color/black">
     
 <!--     tools:context=".VerseShootHome" > -->
@@ -20,10 +20,8 @@
     	android:id="@+id/rightButton"
         android:layout_width="150px"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="24dp"
+        android:layout_alignBottom="@+id/leftButton"
+        android:layout_alignLeft="@+id/invisR"
         android:text="@string/right"
     	android:src="@android:drawable/ic_media_ff"
     	android:clickable = "true" />
@@ -32,12 +30,37 @@
    		android:id="@+id/leftButton"
    		android:layout_width="150px" 
     	android:layout_height="wrap_content"
-       	android:layout_alignBaseline="@+id/rightButton"
-        android:layout_alignBottom="@+id/rightButton"
+       	android:layout_above="@+id/invisL"
+        android:layout_alignLeft="@+id/invisL"
+        android:text="@string/left"
+    	android:src="@android:drawable/ic_media_rew"
+    	android:clickable = "true"  />
+    
+    <Button
+        android:id="@+id/invisL"
+        android:layout_width="150px"
+        android:layout_height="100px"
+        android:layout_alignBaseline="@+id/invisR"
+        android:layout_alignBottom="@+id/invisR"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="25dp"
-    	android:src="@android:drawable/ic_media_rew"
-    	android:clickable = "true"  />"
+        android:clickable="true"
+        android:text="Beam!"
+        android:textColor="@color/white"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/invisR"
+        android:layout_width="150px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="24dp"
+        android:clickable="true"
+        android:text="Beam!"
+        android:textColor="@color/white"
+        android:visibility="invisible" />
 
 <!--     <Button -->
 <!--         android:id="@+id/rightButton" -->
@@ -209,14 +232,16 @@
 <!--     <org.example.verse_shoot.FlowLayout -->
 <!-- 		android:id="@+id/flow_layout" android:layout_width="fill_parent" -->
 <!-- 		android:layout_height="wrap_content" android:gravity="top" /> -->
-
+	<ScrollView android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_alignBottom="@+id/invisL"
+         	android:layout_centerHorizontal="true" android:layout_alignTop = "@+id/invisR">
  		<org.example.verse_shoot.FlowLayout
-			android:id="@+id/flow_layout" android:layout_width="wrap_content"
+			android:id="@+id/flow_layout" android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_alignBaseline="@+id/beamButtonl"
-	        android:layout_alignBottom="@+id/beamButtonl"
+	        android:layout_alignBottom="@+id/invisL"
          	android:layout_centerHorizontal="true" />
+ 		</ScrollView>
 
+<!--  		android:layout_alignBaseline="@+id/invisL" -->
 <!--     <TextView -->
 <!--         android:id="@+id/verseText" -->
 <!--         android:layout_width="wrap_content" -->

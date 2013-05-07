@@ -50,26 +50,32 @@ public class VerseShootHome extends Activity implements OnClickListener {
 //    	String verseString = "John 3:16" + "For God so loved the world, that " +
 //    	    			"he gave his only Son, that whoever believes in him should not perish but have " +
 //    	    			"eternal life.";
-    	String verseString = VERSE + VERSE_TEXT;
+    	String verseString = VERSE + " " + VERSE_TEXT;
     	String[] verseArray = verseString.split("\\s+");
     	
     	Log.d(tag,"HELLO");
     	
     	ArrayList<TextView> wordViews = new ArrayList<TextView> ();
     	int wordCount = verseArray.length;
-    	int currentWordIndex = 0;	
+    	int currentWordIndex = 0;
         boolean[] hiddenWords = new boolean[wordCount];
-        for (int i=0; i<verseArray.length; i++) {
-        	hiddenWords[i] = true;
+        for (int i=0; i<wordCount; i++) {
+        	hiddenWords[i] = false;
         }
+        int numToFill = 5;
+		for(int i = 0; i < numToFill; i++)		// Iterate each blank and fill it with a randomly selected index that does not already exist in filled strings
+		{
+			Random rand = new Random(); 
+			int x = 1;
+			while(x < 2 || hiddenWords[x]) {
+				x = rand.nextInt(wordCount - 1);
+			}
+			hiddenWords[x] = true;
+		}
         FlowLayout l = null;
         l = (FlowLayout) findViewById(R.id.flow_layout);
-        if (l == null) {
-        	Toast msg = Toast.makeText(getBaseContext(), "NULL",Toast.LENGTH_SHORT);
-     		msg.show();
-        }
         if( l != null) {
-        	Toast msg = Toast.makeText(getBaseContext(), verseArray[2],Toast.LENGTH_LONG);
+        	Toast msg = Toast.makeText(getBaseContext(), verseArray[7],Toast.LENGTH_LONG);
      		msg.show();
         	// Create a TextView per word, set its text, and display it.
 	        for (int i = 0; i < verseArray.length; i++) {
@@ -77,7 +83,12 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	        	wordViews.add(t);
 	            t.setText(verseArray[i]);
 	            t.setBackgroundColor(Color.WHITE);
-	            t.setTextColor(Color.BLACK);
+	            if (hiddenWords[i]) {
+	            	t.setTextColor(Color.WHITE);
+	            } else {
+	            	t.setTextColor(Color.BLACK);
+	            }
+	            
 	            // padding: left, top, right, bottom
 	            t.setPadding(10, 5, 10, 5);
 	            t.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -122,9 +133,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	        }
         }
         
-        
-        
-        
+      
         
     	//answerText verseText = new answerText("John 3:16","For God so loved the world, that " +
     	//		"he gave his only Son, that whoever believes in him should not perish but have " +
