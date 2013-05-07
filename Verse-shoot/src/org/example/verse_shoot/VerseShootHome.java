@@ -10,16 +10,21 @@ import java.util.Random;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import org.example.verse_shoot.answerText;
+
+//import org.example.verse_shoot.FlowLayout;
 
 public class VerseShootHome extends Activity implements OnClickListener {
 	
@@ -27,17 +32,97 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	Button beamL, beamR;
 	TextView lt, mt, rt,la,ra;
 	ArrayList<String> randWords;
+	private static final String tag = "blah";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_verse_shoot_home);
     	String[] wordList = {"John","Mary","Jesus","God","Lord",
     			"Christ","Matthew","Judas","Peter","Paul"};
     	randWords = new ArrayList<String>(Arrays.asList(wordList));
+    	String verseString = "John 3:16" + "For God so loved the world, that " +
+    	    			"he gave his only Son, that whoever believes in him should not perish but have " +
+    	    			"eternal life.";
+    	String[] verseArray = verseString.split("\\s+");
+    	
+    	Log.d(tag,"HELLO");
+    	
+    	ArrayList<TextView> wordViews = new ArrayList<TextView> ();
+    	int wordCount = verseArray.length;
+    	int currentWordIndex = 0;	
+        boolean[] hiddenWords = new boolean[wordCount];
+        for (int i=0; i<verseArray.length; i++) {
+        	hiddenWords[i] = true;
+        }
+        FlowLayout l = null;
+        l = (FlowLayout) findViewById(R.id.flow_layout);
+        if (l == null) {
+        	Toast msg = Toast.makeText(getBaseContext(), "NULL",Toast.LENGTH_SHORT);
+     		msg.show();
+        }
+        if( l != null) {
+        	Toast msg = Toast.makeText(getBaseContext(), verseArray[2],Toast.LENGTH_LONG);
+     		msg.show();
+        	// Create a TextView per word, set its text, and display it.
+	        for (int i = 0; i < verseArray.length; i++) {
+	        	TextView t = new TextView(this);
+	        	wordViews.add(t);
+	            t.setText(verseArray[i]);
+	            t.setBackgroundColor(Color.WHITE);
+	            t.setTextColor(Color.BLACK);
+	            // padding: left, top, right, bottom
+	            t.setPadding(10, 5, 10, 5);
+	            t.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+	            t.setSingleLine(true);
+	            t.setClickable(true);
+	            final int locInverseArrayIndex = i;
+		    	final int wordCountCopy = wordCount; 
+//	            t.setOnClickListener(new OnClickListener() {
+//	                @Override
+//	                public void onClick(View v) {
+//	    		    	boolean hidden = hiddenWords[locInverseArrayIndex];
+//	    		    	// Don't process if not hidden
+//	    		    	if(hidden) {
+//		                    TextView tmp = (TextView) v;
+//		    		    	String normalizedWord = normalizeString(verseArray[locInverseArrayIndex]);
+//		    		    	
+//		    		    	// If user clicked on a valid location
+//		    		    	if(normalizedWord.equals(normalizeString((String)wordToTouchView.getText())) ){   
+//		    		    		resetTryCount();
+//		    		    		tmp.setTextColor(Color.BLACK);
+//		    		    		hiddenWords[locInverseArrayIndex] = false;
+//				    			currentWordIndex++;
+//				    			if(currentWordIndex == wordCountCopy) {
+//				    				// Finished last word
+//			            			doneButton.setBackgroundColor(Color.parseColor("#00ffef"));
+//			            			wordToTouchView.setBackgroundColor(Color.parseColor("#000000"));
+//			            			wordToTouchView.setText("");
+//				    			}
+//				    			else if(currentWordIndex < wordCountCopy) {
+//				    				// Else move to next word
+//		    		    			wordToTouchView.setText(normalizeString(mixedWords[currentWordIndex]));
+//		    		    		}
+//		    		    	} else {
+//		    		    		// Guessed location incorrectly and clicked on a hidden word. Check whether should show answer.
+//		    		    		showIfExceedGuesses();
+//		    		    	}
+//	    		    	}
+
+	//                }
+	      //      });
+	            l.addView(t, new FlowLayout.LayoutParams(5, 5));
+	        }
+        }
+        
+        
+        
+        
+        
     	//answerText verseText = new answerText("John 3:16","For God so loved the world, that " +
     	//		"he gave his only Son, that whoever believes in him should not perish but have " +
     		//	"eternal life.");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verse_shoot_home);
+        
         //leftButton = (Button) findViewById(R.id.leftButton);
         leftButton = (ImageView) findViewById(R.id.leftButton);
         leftButton.setOnClickListener(this);

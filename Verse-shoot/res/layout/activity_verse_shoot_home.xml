@@ -1,10 +1,21 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="UTF-8"?>    
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_verse_shoot_home"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".VerseShootHome" >
-
+    android:layout_height = "wrap_content"
+    android:background="@color/black">
+    
+<!--     tools:context=".VerseShootHome" > -->
+<!-- <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- 	android:id="@+id/activity_verse_shoot_home" android:layout_width="fill_parent" -->
+<!-- 	android:layout_height="fill_parent" android:orientation="vertical" -->
+<!-- 	android:padding="10dip"> -->
+<!--         android:layout_height="match_parent" -->
+<!--     <ScrollView android:layout_height="wrap_content" android:layout_width="fill_parent" > -->
+<!--     <org.example.verse_shoot.FlowLayout -->
+<!-- 		android:id="@+id/flow_layout" android:layout_width="fill_parent" -->
+<!-- 		android:layout_height="wrap_content" android:gravity="bottom" /></ScrollView> -->
     <ImageButton
     	android:id="@+id/rightButton"
         android:layout_width="150px"
@@ -194,15 +205,29 @@
         android:gravity="center_horizontal"
         android:src="@drawable/beam"
         android:visibility="invisible" />
+    
+<!--     <org.example.verse_shoot.FlowLayout -->
+<!-- 		android:id="@+id/flow_layout" android:layout_width="fill_parent" -->
+<!-- 		android:layout_height="wrap_content" android:gravity="top" /> -->
 
-    <TextView
-        android:id="@+id/verseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/beamButtonl"
-        android:layout_alignBottom="@+id/beamButtonl"
-        android:layout_centerHorizontal="true"
-        android:text="@string/hello_world"
-        android:textColor="@color/white" />
+ 		<org.example.verse_shoot.FlowLayout
+			android:id="@+id/flow_layout" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBaseline="@+id/beamButtonl"
+	        android:layout_alignBottom="@+id/beamButtonl"
+         	android:layout_centerHorizontal="true" />
+
+<!--     <TextView -->
+<!--         android:id="@+id/verseText" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignBaseline="@+id/beamButtonl" -->
+<!--         android:layout_alignBottom="@+id/beamButtonl" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:text="@string/hello_world" -->
+<!--         android:textColor="@color/white" /> -->
     
 </RelativeLayout>
+    
+
+<!-- </LinearLayout> -->
