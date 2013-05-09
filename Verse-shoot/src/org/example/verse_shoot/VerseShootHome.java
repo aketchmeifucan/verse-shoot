@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +35,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	TextView lt, mt, rt,la,ra;
 	ArrayList<String> randWords;
 	private static final String tag = "blah";
+	public answerText answerText;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
     	String VERSE_TEXT = intent.getStringExtra("VERSE_TEXT");
     	System.out.println(VERSE);
     	System.out.println(VERSE_TEXT);
+    	answerText = new answerText(VERSE,VERSE_TEXT);
     	String[] wordList = {"John","Mary","Jesus","God","Lord",
     			"Christ","Matthew","Judas","Peter","Paul"};
     	randWords = new ArrayList<String>(Arrays.asList(wordList));
@@ -167,13 +171,13 @@ public class VerseShootHome extends Activity implements OnClickListener {
         randWords.trimToSize();
         switch(rand.nextInt(3)) {
         	case 0:
-        		lt.setText("FROMVERSE");
+        		lt.setText(answerText.currentWord());
         		break;
         	case 1:
-        		mt.setText("FROMVERSE");
+        		mt.setText(answerText.currentWord());
         		break;
         	case 2:
-        		rt.setText("FROMVERSE");
+        		rt.setText(answerText.currentWord());
         		break;
         }
         la = (TextView) findViewById(R.id.leftAnim);
@@ -251,6 +255,48 @@ public class VerseShootHome extends Activity implements OnClickListener {
     		break;
         case R.id.beamButtonl:
         		lightBeam.setVisibility(0);
+        		if(mt.getText() == answerText.currentWord()) {
+        			answerText.fillWord();
+        			Random rand = new Random();
+        	        int lRand = rand.nextInt(randWords.size() - 1);
+        	        lt.setText(randWords.get(lRand));
+        	        randWords.remove(lRand);
+        	        randWords.trimToSize(); 
+        	        int mRand = rand.nextInt(randWords.size() - 1);
+        	        mt.setText(randWords.get(mRand));
+        	        randWords.remove(mRand);
+        	        randWords.trimToSize();
+        	        int rRand = rand.nextInt(randWords.size() - 1);
+        	        rt.setText(randWords.get(rRand));
+        	        randWords.remove(rRand);
+        	        randWords.trimToSize();
+        	        switch(rand.nextInt(3)) {
+        	        	case 0:
+        	        		lt.setText(answerText.currentWord());
+        	        		break;
+        	        	case 1:
+        	        		mt.setText(answerText.currentWord());
+        	        		break;
+        	        	case 2:
+        	        		rt.setText(answerText.currentWord());
+        	        		break;
+        	        }
+        			
+        		}
+        		else {
+        			//play sound error
+//        			MediaPlayer mp = MediaPlayer.create(Test.this, R.raw.mysound);
+//                    mp.setOnCompletionListener(new OnCompletionListener() {
+//
+//                        //@Override
+//                        public void onCompletion(MediaPlayer mp) {
+//                            // TODO Auto-generated method stub
+//                            mp.release();
+//                        }
+//
+//                    });   
+//                    mp.start();
+        		}
         		lightBeam.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -260,6 +306,34 @@ public class VerseShootHome extends Activity implements OnClickListener {
         		break;
         case R.id.beamButtonr:
     		lightBeam.setVisibility(0);
+    		if(mt.getText() == answerText.currentWord()) {
+    			answerText.fillWord();
+    			Random rand = new Random();
+    	        int lRand = rand.nextInt(randWords.size() - 1);
+    	        lt.setText(randWords.get(lRand));
+    	        randWords.remove(lRand);
+    	        randWords.trimToSize(); 
+    	        int mRand = rand.nextInt(randWords.size() - 1);
+    	        mt.setText(randWords.get(mRand));
+    	        randWords.remove(mRand);
+    	        randWords.trimToSize();
+    	        int rRand = rand.nextInt(randWords.size() - 1);
+    	        rt.setText(randWords.get(rRand));
+    	        randWords.remove(rRand);
+    	        randWords.trimToSize();
+    	        switch(rand.nextInt(3)) {
+    	        	case 0:
+    	        		lt.setText(answerText.currentWord());
+    	        		break;
+    	        	case 1:
+    	        		mt.setText(answerText.currentWord());
+    	        		break;
+    	        	case 2:
+    	        		rt.setText(answerText.currentWord());
+    	        		break;
+    	        }
+    			
+    		}	
     		lightBeam.postDelayed(new Runnable() {
                 @Override
                 public void run() {
