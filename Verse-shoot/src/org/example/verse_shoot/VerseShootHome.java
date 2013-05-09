@@ -56,6 +56,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
 //    	    			"eternal life.";
     	String verseString = VERSE + " " + VERSE_TEXT;
     	String[] verseArray = verseString.split("\\s+");
+    	verseArray = answerText.textStrings;
     	
     	Log.d(tag,"HELLO");
     	
@@ -87,7 +88,8 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	        	wordViews.add(t);
 	            t.setText(verseArray[i]);
 	            t.setBackgroundColor(Color.WHITE);
-	            if (hiddenWords[i]) {
+	            //if (hiddenWords[i]) {
+	            if (!answerText.filledStrings.contains(i)) {
 	            	t.setTextColor(Color.WHITE);
 	            } else {
 	            	t.setTextColor(Color.BLACK);
