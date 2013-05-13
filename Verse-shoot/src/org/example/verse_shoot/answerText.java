@@ -1,19 +1,22 @@
 package org.example.verse_shoot;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import org.example.verse_shoot.textObj;
 
 public class answerText {
-	//public textObj[] textStrings = new textObj[500];// The array of text containing the verse.
-	public String[] textStrings = new String[500];
+	//public textObj[] textStrings = new textObj[500];// The array of text containing the verse. 
+	public String[] textStrings;
 	public int iterator = 0;		// Earliest unfilled blank.
 	public List<Integer> filledStrings; // Ordered list. Index of filled string. Draw should use to determine what strings answered/filled in.
 	
 	
 	
 	public answerText(String ref,String verse ){	// Constructor
+		System.out.println("Construct Start");
+		filledStrings = new ArrayList<Integer>();
 		populateTextObj(ref,verse);
 		randomizeBlanks();
 	}
@@ -23,10 +26,14 @@ public class answerText {
 		// Split the full verse into temp, iterate temp and put into textObjs.
 		String[] temp;
 		temp = verse.split(" ");
+		int verseLen = temp.length;
+		textStrings = new String[verseLen+1];
 		textStrings[0] = (ref);	//Set the reference as the first word.
+				
 		for(int i = 0; i<temp.length;i++){
 			textStrings[i+1] = (temp[i]); //i+1 to dodge the ref word.
 		}		
+		System.out.println("Return True");
 		return true;
 	}
 	
@@ -49,18 +56,21 @@ public class answerText {
 	
 	//Randomly select filled words. (fill half of the words)
 	private void randomizeBlanks(){
-		//int numToFill = (textStrings.length/2);	// Half of the words
-		int numToFill = 5;
+		int numToFill = (textStrings.length/2);	// Half of the words
+		System.out.println("Num to fill:" + numToFill);
 		for(int i = 0; i < numToFill; i++)		// Iterate each blank and fill it with a randomly selected index that does not already exist in filled strings
 		{
 			Random rand = new Random(); 
 			int x = rand.nextInt(textStrings.length - 1);
+			System.out.println("x: " + x);
 			//int[] x = new int[1]; 
 			//x[0] = rand.nextInt(textStrings.length); 
-			if(filledStrings.contains(x))
+			if(filledStrings.contains(x)){	// If it contains X, we want to reiterate again, because we still want l/2 blanks
 				i--;
-			else
+			}
+			else	{
 				filledStrings.add(x);
+			}	
 		}
 	}
 	

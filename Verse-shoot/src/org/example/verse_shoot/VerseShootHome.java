@@ -24,6 +24,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+
 import org.example.verse_shoot.answerText;
 
 //import org.example.verse_shoot.FlowLayout;
@@ -36,6 +37,9 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	ArrayList<String> randWords;
 	private static final String tag = "blah";
 	public answerText answerText;
+	String[] wordList = {"John","Mary","Jesus","God","Lord",
+			"Christ","Matthew","Judas","Peter","Paul"};
+	ArrayList<TextView> wordViews = new ArrayList<TextView> ();
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +52,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
     	System.out.println(VERSE);
     	System.out.println(VERSE_TEXT);
     	answerText = new answerText(VERSE,VERSE_TEXT);
-    	String[] wordList = {"John","Mary","Jesus","God","Lord",
-    			"Christ","Matthew","Judas","Peter","Paul"};
+    	
     	randWords = new ArrayList<String>(Arrays.asList(wordList));
 //    	String verseString = "John 3:16" + "For God so loved the world, that " +
 //    	    			"he gave his only Son, that whoever believes in him should not perish but have " +
@@ -58,30 +61,32 @@ public class VerseShootHome extends Activity implements OnClickListener {
     	String[] verseArray = verseString.split("\\s+");
     	verseArray = answerText.textStrings;
     	
-    	Log.d(tag,"HELLO");
+    	Log.d(tag,"verseArrayFilled");
     	
-    	ArrayList<TextView> wordViews = new ArrayList<TextView> ();
+    	//ArrayList<TextView> // = new ArrayList<TextView> ();
     	int wordCount = verseArray.length;
-    	int currentWordIndex = 0;
-        boolean[] hiddenWords = new boolean[wordCount];
-        for (int i=0; i<wordCount; i++) {
-        	hiddenWords[i] = false;
-        }
-        int numToFill = 5;
-		for(int i = 0; i < numToFill; i++)		// Iterate each blank and fill it with a randomly selected index that does not already exist in filled strings
-		{
-			Random rand = new Random(); 
-			int x = 1;
-			while(x < 2 || hiddenWords[x]) {
-				x = rand.nextInt(wordCount - 1);
-			}
-			hiddenWords[x] = true;
-		}
+//    	int currentWordIndex = 0;
+//        boolean[] hiddenWords = new boolean[wordCount];
+//        for (int i=0; i<wordCount; i++) {
+//        	hiddenWords[i] = false;
+//        }
+//        int numToFill = 5;
+//		for(int i = 0; i < numToFill; i++)		// Iterate each blank and fill it with a randomly selected index that does not already exist in filled strings
+//		{
+//			Random rand = new Random(); 
+//			int x = 1;
+//			while(x < 2 || hiddenWords[x]) {
+//				x = rand.nextInt(wordCount - 1);
+//			}
+//			hiddenWords[x] = true;
+//		}
         FlowLayout l = null;
         l = (FlowLayout) findViewById(R.id.flow_layout);
+        Log.d(tag,"above l!= null");
         if( l != null) {
-        	Toast msg = Toast.makeText(getBaseContext(), verseArray[7],Toast.LENGTH_LONG);
-     		msg.show();
+        	Log.d(tag,"in l!= null");
+//        	Toast msg = Toast.makeText(getBaseContext(), verseArray[7],Toast.LENGTH_LONG);
+//     		msg.show();
         	// Create a TextView per word, set its text, and display it.
 	        for (int i = 0; i < verseArray.length; i++) {
 	        	TextView t = new TextView(this);
@@ -139,7 +144,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	        }
         }
         
-      
+        System.out.println("size" + wordViews.size());
         
     	//answerText verseText = new answerText("John 3:16","For God so loved the world, that " +
     	//		"he gave his only Son, that whoever believes in him should not perish but have " +
@@ -189,7 +194,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
     @Override
     public void onClick (View v) {
     	switch (v.getId()) {
-        case R.id.leftButton:
+        case R.id.rightButton:
         	la.setText("        --");
             ra.setText("        --");
         	la.setVisibility(0);
@@ -222,7 +227,7 @@ public class VerseShootHome extends Activity implements OnClickListener {
                 }
             }, 100);
     		break;
-        case R.id.rightButton:
+        case R.id.leftButton:
         	la.setText("--        ");  
         	ra.setText("--        ");
         	la.setVisibility(0);
@@ -258,46 +263,79 @@ public class VerseShootHome extends Activity implements OnClickListener {
         case R.id.beamButtonl:
         		lightBeam.setVisibility(0);
         		if(mt.getText() == answerText.currentWord()) {
-        			answerText.fillWord();
-        			Random rand = new Random();
-        	        int lRand = rand.nextInt(randWords.size() - 1);
-        	        lt.setText(randWords.get(lRand));
-        	        randWords.remove(lRand);
-        	        randWords.trimToSize(); 
-        	        int mRand = rand.nextInt(randWords.size() - 1);
-        	        mt.setText(randWords.get(mRand));
-        	        randWords.remove(mRand);
-        	        randWords.trimToSize();
-        	        int rRand = rand.nextInt(randWords.size() - 1);
-        	        rt.setText(randWords.get(rRand));
-        	        randWords.remove(rRand);
-        	        randWords.trimToSize();
-        	        switch(rand.nextInt(3)) {
-        	        	case 0:
-        	        		lt.setText(answerText.currentWord());
-        	        		break;
-        	        	case 1:
-        	        		mt.setText(answerText.currentWord());
-        	        		break;
-        	        	case 2:
-        	        		rt.setText(answerText.currentWord());
-        	        		break;
-        	        }
-        			
+        			wordViews.get(answerText.iterator).setTextColor(Color.BLACK);
+        			System.out.println(wordViews.get(answerText.iterator));
+        			if(answerText.isComplete()) {
+        				Log.d(tag,"COMPLETE");
+        				MediaPlayer mp = MediaPlayer.create(this, R.raw.success);
+                        mp.setOnCompletionListener(new OnCompletionListener() {
+                            //@Override
+                            public void onCompletion(MediaPlayer mp) {
+                                // TODO Auto-generated method stub
+                                mp.release();
+                            }
+
+                        });   
+                        mp.start();
+                        try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+                        Intent intent = new Intent(this, VerseChooser.class);
+                        startActivity(intent);
+        			}else {
+        				MediaPlayer mp = MediaPlayer.create(this, R.raw.correct);
+                        mp.setOnCompletionListener(new OnCompletionListener() {
+                            //@Override
+                            public void onCompletion(MediaPlayer mp) {
+                                // TODO Auto-generated method stub
+                                mp.release();
+                            }
+
+                        });   
+                        mp.start();
+	        			answerText.fillWord();
+	        			randWords = new ArrayList<String>(Arrays.asList(wordList));
+	        			Random rand = new Random();
+	        	        int lRand = rand.nextInt(randWords.size() - 1);
+	        	        lt.setText(randWords.get(lRand));
+	        	        randWords.remove(lRand);
+	        	        randWords.trimToSize(); 
+	        	        int mRand = rand.nextInt(randWords.size() - 1);
+	        	        mt.setText(randWords.get(mRand));
+	        	        randWords.remove(mRand);
+	        	        randWords.trimToSize();
+	        	        int rRand = rand.nextInt(randWords.size() - 1);
+	        	        rt.setText(randWords.get(rRand));
+	        	        randWords.remove(rRand);
+	        	        randWords.trimToSize();
+	        	        switch(rand.nextInt(3)) {
+	        	        	case 0:
+	        	        		lt.setText(answerText.currentWord());
+	        	        		break;
+	        	        	case 1:
+	        	        		mt.setText(answerText.currentWord());
+	        	        		break;
+	        	        	case 2:
+	        	        		rt.setText(answerText.currentWord());
+	        	        		break;
+	        	        }
+        			}		
         		}
         		else {
         			//play sound error
-//        			MediaPlayer mp = MediaPlayer.create(Test.this, R.raw.mysound);
-//                    mp.setOnCompletionListener(new OnCompletionListener() {
-//
-//                        //@Override
-//                        public void onCompletion(MediaPlayer mp) {
-//                            // TODO Auto-generated method stub
-//                            mp.release();
-//                        }
-//
-//                    });   
-//                    mp.start();
+        			MediaPlayer mp = MediaPlayer.create(this, R.raw.error);
+                    mp.setOnCompletionListener(new OnCompletionListener() {
+                        //@Override
+                        public void onCompletion(MediaPlayer mp) {
+                            // TODO Auto-generated method stub
+                            mp.release();
+                        }
+
+                    });   
+                    mp.start();
         		}
         		lightBeam.postDelayed(new Runnable() {
                     @Override
@@ -309,33 +347,78 @@ public class VerseShootHome extends Activity implements OnClickListener {
         case R.id.beamButtonr:
     		lightBeam.setVisibility(0);
     		if(mt.getText() == answerText.currentWord()) {
-    			answerText.fillWord();
-    			Random rand = new Random();
-    	        int lRand = rand.nextInt(randWords.size() - 1);
-    	        lt.setText(randWords.get(lRand));
-    	        randWords.remove(lRand);
-    	        randWords.trimToSize(); 
-    	        int mRand = rand.nextInt(randWords.size() - 1);
-    	        mt.setText(randWords.get(mRand));
-    	        randWords.remove(mRand);
-    	        randWords.trimToSize();
-    	        int rRand = rand.nextInt(randWords.size() - 1);
-    	        rt.setText(randWords.get(rRand));
-    	        randWords.remove(rRand);
-    	        randWords.trimToSize();
-    	        switch(rand.nextInt(3)) {
-    	        	case 0:
-    	        		lt.setText(answerText.currentWord());
-    	        		break;
-    	        	case 1:
-    	        		mt.setText(answerText.currentWord());
-    	        		break;
-    	        	case 2:
-    	        		rt.setText(answerText.currentWord());
-    	        		break;
-    	        }
-    			
-    		}	
+    			wordViews.get(answerText.iterator).setTextColor(Color.BLACK);
+    			if(answerText.isComplete()) {
+    				Log.d(tag,"COMPLETE");
+    				MediaPlayer mp = MediaPlayer.create(this, R.raw.success);
+                    mp.setOnCompletionListener(new OnCompletionListener() {
+                        //@Override
+                        public void onCompletion(MediaPlayer mp) {
+                            // TODO Auto-generated method stub
+                            mp.release();
+                        }
+
+                    });   
+                    mp.start();
+                    try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                    Intent intent = new Intent(this, VerseChooser.class);
+                    startActivity(intent);
+    			}else {
+    				MediaPlayer mp = MediaPlayer.create(this, R.raw.correct);
+                    mp.setOnCompletionListener(new OnCompletionListener() {
+                        //@Override
+                        public void onCompletion(MediaPlayer mp) {
+                            // TODO Auto-generated method stub
+                            mp.release();
+                        }
+
+                    });   
+                    mp.start();
+	    			answerText.fillWord();
+	    			randWords = new ArrayList<String>(Arrays.asList(wordList));
+	    			Random rand = new Random();
+	    	        int lRand = rand.nextInt(randWords.size() - 1);
+	    	        lt.setText(randWords.get(lRand));
+	    	        randWords.remove(lRand);
+	    	        randWords.trimToSize(); 
+	    	        int mRand = rand.nextInt(randWords.size() - 1);
+	    	        mt.setText(randWords.get(mRand));
+	    	        randWords.remove(mRand);
+	    	        randWords.trimToSize();
+	    	        int rRand = rand.nextInt(randWords.size() - 1);
+	    	        rt.setText(randWords.get(rRand));
+	    	        randWords.remove(rRand);
+	    	        randWords.trimToSize();
+	    	        switch(rand.nextInt(3)) {
+	    	        	case 0:
+	    	        		lt.setText(answerText.currentWord());
+	    	        		break;
+	    	        	case 1:
+	    	        		mt.setText(answerText.currentWord());
+	    	        		break;
+	    	        	case 2:
+	    	        		rt.setText(answerText.currentWord());
+	    	        		break;
+	    	        }
+    			}
+    		}
+    		else {
+    			MediaPlayer mp = MediaPlayer.create(this, R.raw.error);
+                mp.setOnCompletionListener(new OnCompletionListener() {
+                    //@Override
+                    public void onCompletion(MediaPlayer mp) {
+                        // TODO Auto-generated method stub
+                        mp.release();
+                    }
+
+                });   
+                mp.start();
+    		}
     		lightBeam.postDelayed(new Runnable() {
                 @Override
                 public void run() {
