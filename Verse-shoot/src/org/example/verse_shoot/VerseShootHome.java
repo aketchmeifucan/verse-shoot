@@ -38,7 +38,9 @@ public class VerseShootHome extends Activity implements OnClickListener {
 	private static final String tag = "blah";
 	public answerText answerText;
 	String[] wordList = {"John","Mary","Jesus","God","Lord",
-			"Christ","Matthew","Judas","Peter","Paul"};
+			"Christ","Matthew","Judas","Peter","Paul", "I", 
+			"her",  "a", "an", "this", "why", "yes", "no", 
+			"none", "heaven", "hell", "time", "love"};
 	ArrayList<TextView> wordViews = new ArrayList<TextView> ();
 	
     @Override
